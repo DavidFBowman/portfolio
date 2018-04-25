@@ -1,0 +1,38 @@
+~Setup
+
+If you aren't using a preconfigured board or are working from a clean install 
+
+~Configuring NFS
+
+You will also need to make sure the NFS service is actually running. For me that was by running 
+sudo service nfs-kernel-server start
+if that command is unrecognised navigate to /etc/init.d and replace nfs-kernel-server with the NFS line found in there 
+in /etc/exports you want to type /mnt/nfsserver 192.168.1.XX(rw,sync,no_subtree_check) XX is the client IP
+if you have issues ensure that you have a static IP for both the client and server. This step is specific to your router.
+
+I've configured it so it the NFS drive will mount on launch but if it doesn't 
+sudo mount 192.168.1.XX:/mnt/nfsserver /mnt/nfs 
+
+~Executing Code on RP
+
+You MUST get a bitstream running to execute code as:
+systemctl start redpitaya_scpi &
+
+add redpitaya to path by adding /opt/redpitaya/lib to /etc/ld.so.conf.d/libc.conf and running: 
+sudo ldconfig
+if running a C module in Python you MUST run the Initialize function first.
+
+~Running Swig and Compiling Code
+
+compile as gcc -c example.c example_wrap.c \-I /usr/include/python2.7
+
+running compile.sh X where X is the name of your .i .c and .h files will handle compilation for you 
+you will need to set permissions to run the shell script by running chmod +x compile.sh
+
+if you want to handle compilations yourself the below is a working example
+
+corresponding to the code in ...swig/swig_blink_working swigged modules should be compiled thusly:
+swig -python digital_led_blink_fn.i
+cc -O2 -fPIC -g -std=gnu99 -Wall -Werror -I/opt/redpitaya/include  -L/opt/redpitaya/lib -c  digital_led_blink_fn.c -lm -lpthread -lrp
+cc -O2 -fPIC -g -std=gnu99 -Wall -Werror -I/opt/redpitaya/include  -L/opt/redpitaya/lib -c  digital_led_blink_fn_wrap.c \-I /usr/include/python2.7 -lm -lpthread -lrp
+cc -O2 -fPIC -g -std=gnu99 -Wall -Werror -I/opt/redpitaya/include  -L/opt/redpitaya/lib -shared digital_led_blink_fn.o digital_led_blink_fn_wrap.o -lm -lpthread -lrp -o _digital_led_blink_fn.so

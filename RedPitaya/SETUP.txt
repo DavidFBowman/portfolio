@@ -1,0 +1,28 @@
+The following should be run after a clean install of the Red Pitaya OS to allow full functionality with the rest of the code base
+
+Set up of RP board{
+
+sudo apt get install swig
+sudo apt-get install python -pip
+#the above only seemed to be required to get numpy working for python 2. After doing so I also had to then run the following 
+sudo apt-get install --reinstall python-pkg-resources
+pip install --upgrade pip
+echo This next step might take a solid 10 mins or so, don't worry about it.
+sudo pip install numpy
+sudo pip install pyvisa
+sudo pip install pyvisa-py
+sudo pip install setuptools
+}
+
+Executing python code{
+
+You MUST start a bitstream by 
+systemctl start redpitaya_scpi
+}
+
+How to run code after exiting SSH{
+
+sudo apt-get install tmux
+
+execute code within tmux: exit with ctrl-b d
+}
