@@ -1,5 +1,9 @@
 A small sample of my code for interested parties.
 
+-Machine Learning
+
+An ipython notebook showcasing use of Numpy, Pandas, Tensorflow and Keras to solve a datascience problem as part of a Kaggle challenge.
+
 -Red Pitaya
 
 This was written as part of the position of Postdoctoral Research Associate at Royal Holloway.
@@ -10,7 +14,7 @@ This project is conducted in C, Python, SQLite and SWIG.
 
 -Phonons
 
-A Python class used as part of my PhD to analyse the output of ab-intio calculations and compare them with experimental data.
+A Python class used as part of my PhD to analyse the output of ab-intio calculations and compare them with experimental data using an OO approach.
 
 -Monte Carlo Clustering
 
@@ -21,10 +25,3 @@ The clusters are formed using a simulated annealing Monte Carlo algorithm.
 
 Python tools developed as part of the Coursera course Bioinformatics for analysis of DNA strings of bacteria and genomes.
 
--Machine Learning
-
-One week of material writen in MATLAB covering using K means clustering for image compression developed as part of the Coursera course on Machine Learning.
-Read the README in the directory to see which parts I wrote and which were provided by the course.
-Executing ex7.m will show the image compression algorithm working on the file bird_small.png
-
-Additional ML code can be provided on request showing support vector machines, neural networks and a range of other ML algorithms and techniques.
